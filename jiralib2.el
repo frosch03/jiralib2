@@ -384,6 +384,15 @@ ARGS is an association list of the fields to set for the issue."
                          `(description . ,description)
                          `(summary . ,summary)))
 
+(defun jiralib2-update-summary-description-wbsdate (issue-id summary description wbsstartdate wbsenddate)
+  "Change the summary and description of issue ISSUE-ID to SUMMARY
+  DESCRIPTION and WBS-GANTT-DATES."
+  (jiralib2-update-issue issue-id
+                         `(description . ,description)
+                         `(summary . ,summary)
+                         `(customfield_24230 . ,wbsstartdate)
+                         `(customfield_24229 . ,wbsenddate)))
+
 (defun jiralib2-set-issue-type (issue-id type)
   "Change the issue type of ISSUE-ID to TYPE."
   (jiralib2-update-issue issue-id `(issuetype . ((name . ,type)))))
